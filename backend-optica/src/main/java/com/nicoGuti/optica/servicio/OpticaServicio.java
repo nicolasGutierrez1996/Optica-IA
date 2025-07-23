@@ -35,4 +35,11 @@ public class OpticaServicio {
     public Optional<Optica> buscarPorEmail(String email) {
         return opticaRepo.findByEmail(email);
     }
+
+    public boolean existePorMail(String email){
+        return opticaRepo.existsByEmail(email);
+    }
+    public boolean existePorNombre(String nombre){
+        return opticaRepo.existsByNombre(nombre);
+    }
 }

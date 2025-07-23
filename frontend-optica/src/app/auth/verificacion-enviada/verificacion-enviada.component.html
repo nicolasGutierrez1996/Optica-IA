@@ -1,0 +1,33 @@
+<div class="verifica-container">
+  <div class="verifica-icono">
+    <img src="../../../assets/img/imagen-verifica-correo.png" alt="Icono de correo" />
+  </div>
+
+  <div class="verifica-texto">
+    <h2>📩 Revisá tu correo</h2>
+    <p>Te enviamos un email para verificar tu cuenta en <strong>Óptica IA</strong>.</p>
+    <p>Hacé clic en el enlace del correo para confirmar tu cuenta.</p>
+
+    <p class="enlace-reenvio">
+      ¿No te llegó el correo?
+      <a
+        (click)="reenviarEmail()"
+        [class.desactivado]="reenviando || tiempoRestanteTexto"
+        [style.pointerEvents]="reenviando || tiempoRestanteTexto ? 'none' : 'auto'"
+        [style.opacity]="reenviando || tiempoRestanteTexto ? 0.5 : 1"
+      >
+        Reenviar
+      </a>
+      <br />
+      @if (tiempoRestanteTexto) {
+        <small class="texto-tiempo">{{ tiempoRestanteTexto }}</small>
+      }
+    </p>
+
+    @if (enviado) {
+      <p class="alert alert-success mt-2">{{ mensaje }}</p>
+    } @else if (error) {
+      <p class="alert alert-danger mt-2">{{ mensajeError }}</p>
+    }
+  </div>
+</div>

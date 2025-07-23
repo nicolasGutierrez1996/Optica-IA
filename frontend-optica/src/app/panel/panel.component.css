@@ -1,0 +1,46 @@
+.panel-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;         /* ✅ clave para que se active scroll */
+  overflow: hidden;
+  padding-left: 260px;
+  width: 100%;
+}
+
+app-sidebar-panel {
+  width: 250px;
+  min-width: 250px;
+  background-color: #0b132b; /* o tu color */
+  height: 100%;
+}
+
+.panel-contenido {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+
+  background: linear-gradient(rgba(255,255,255,0.05), rgba(255,255,255,0.05)),
+  url('/assets/img/imagen-panel-fondo.png') center/cover no-repeat;
+
+  min-height: 100vh;
+}
+.panel-contenido::-webkit-scrollbar {
+  width: 10px;               /* ancho del scroll */
+}
+
+.panel-contenido::-webkit-scrollbar-track {
+  background: transparent;   /* fondo del track */
+}
+
+.panel-contenido::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2); /* color del "thumb" */
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+  transition: background-color 0.2s;
+}
+
+.panel-contenido::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}

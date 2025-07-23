@@ -1,0 +1,125 @@
+
+@switch (estado) {
+  @case ('aprobada') {
+    <div class="tarjeta-confirmacion">
+      <div class="titulo">
+        ✅ ¡Listo!
+      </div>
+      <div class="subtitulo">
+        La óptica ya está registrada y tiene una suscripción activa.
+      </div>
+    </div>
+  }
+  @default {
+    <form [formGroup]="formulario" class="form-suscripcion">
+      <h1 class="titulo-suscripcion">Elegí tu plan de suscripción</h1>
+
+      <!-- Tarjetas de planes -->
+      <div class="contenedor-tarjetas" [ngClass]="{ 'centrado': vieneDeEdicion }">
+        <!-- Plan Básico -->
+        @if (!vieneDeEdicion){
+
+        <label
+          class="tarjeta-plan basico"
+          [class.seleccionado]="formulario.value.plan === 'basico'"
+        >
+          <div class="tarjeta-header basico-header">
+            <input type="radio" formControlName="plan" value="basico" />
+            <span>👓 Plan Básico</span>
+          </div>
+          <div class="tarjeta-cuerpo">
+            <p class="precio">$25.000 / mes</p>
+            <ul class="beneficios">
+              <li>Subida de anteojos</li>
+              <li>Subida de lentes de contacto</li>
+              <li>Visualización de catálogo</li>
+            </ul>
+          </div>
+        </label>
+        }
+        <!-- Plan Premium -->
+        <label
+          class="tarjeta-plan premium"
+          [class.seleccionado]="formulario.value.plan === 'premium'"
+        >
+          <div class="tarjeta-header premium-header">
+            <input type="radio" formControlName="plan" value="premium" />
+            <span>⭐ Plan Premium</span>
+          </div>
+          <div class="tarjeta-cuerpo">
+            <p class="precio">$45.000 / mes</p>
+            <ul class="beneficios">
+              <li>Todo lo del Plan Básico</li>
+              <li>Visualización de métricas</li>
+              <li>Prueba con IA de lentes y anteojos</li>
+              <li>Visualización en el mapa</li>
+              <li>Atención prioritaria</li>
+            </ul>
+          </div>
+        </label>
+      </div>
+
+      <!-- Formulario adicional -->
+      <div class="campos-form">
+        <div class="grupo-inputs">
+          <div>
+            <label class="block text-sm font-medium mb-1">DNI del responsable</label>
+            <input
+              type="text"
+              formControlName="dni"
+              placeholder="Ej: 30123456"
+            />
+            @if (formulario.controls['dni'].errors && formulario.controls['dni'].touched) {
+              @if (formulario.controls['dni'].errors['required']) {
+                <div class="invalid-feedback d-block">Campo Requerido</div>
+              }
+              @if (formulario.controls['dni'].errors?.['dniInvalido']) {
+                <div class="invalid-feedback d-block">Formato incorrecto</div>
+              }
+
+            }
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-1">Cupón de descuento (opcional)</label>
+            <input
+              type="text"
+              formControlName="cupon"
+              placeholder="Ej: OPTICA20"
+            />
+          </div>
+        </div>
+
+        <div class="boton-container">
+          @if(!vieneDeEdicion){
+            <button
+              (click)="pagar()"
+              [ngClass]="formulario.value.plan === 'premium' ? 'btn-premium' : 'boton-pagar'"
+              [disabled]="formulario.invalid">
+              Suscribirse plan {{ formulario.value.plan === 'premium' ? 'Premium' : 'Básico' }}
+            </button>
+          }@else{
+            <button
+              (click)=" abrirConfirmacion()"
+              [ngClass]="formulario.value.plan === 'premium' ? 'btn-premium' : 'boton-pagar'"
+              [disabled]="formulario.invalid">
+              Suscribirse plan {{ formulario.value.plan === 'premium' ? 'Premium' : 'Básico' }}
+            </button>
+          }
+        </div>
+      </div>
+    </form>
+
+  }
+}
+@if(vieneDeEdicion && mostrarConfirmacion){
+    <div class="modal-backdrop">
+      <app-confirmar-password
+        (onConfirm)="confirmarAccion()"
+        (onCancel)="cancelarConfirmacion()"
+      ></app-confirmar-password>
+    </div>
+
+}
+
+

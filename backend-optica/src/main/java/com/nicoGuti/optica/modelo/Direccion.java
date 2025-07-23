@@ -24,18 +24,25 @@ public class Direccion {
     private Long id;
 
     @NotBlank
-    @Size(max = 100)
+    @Size(min = 3, max = 100)
     private String provincia;
 
     @NotBlank
-    @Size(max = 100)
+    @Size(min = 3, max = 100)
     private String localidad;
 
-    @Size(max = 100)
+    @NotBlank
+    @Size(min = 3, max = 100)
     private String calle;
 
     @Min(1)
     private Integer nroCalle;
+
+    @Size( max = 10)
+    private String piso;
+
+    @Size( max = 10)
+    private String depto;
 
     @Column(name = "fecha_creacion")
     private LocalDateTime fecha_creacion;
@@ -45,11 +52,11 @@ public class Direccion {
 
     @PrePersist
     private void antesDePersistir(){
-        this.fecha_creacion=LocalDateTime.now();
-    }
-    @PreUpdate
-    private void antesDeModificar(){
-        this.fecha_ultima_actualizacion=LocalDateTime.now();
+        this.fecha_creacion = LocalDateTime.now();
     }
 
+    @PreUpdate
+    private void antesDeModificar(){
+        this.fecha_ultima_actualizacion = LocalDateTime.now();
+    }
 }

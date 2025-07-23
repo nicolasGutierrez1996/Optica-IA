@@ -1,0 +1,215 @@
+<form [formGroup]="form" class="form-optica" novalidate>
+  <h2 class="titulo-formulario"><i class="fa-solid fa-store"></i>Registrar Óptica</h2>
+
+  <div class="form-group">
+    <label for="nombre">Nombre:</label>
+    <input id="nombre" type="text" formControlName="nombre" />
+    @if (form.controls['nombre'].errors && form.controls['nombre'].touched) {
+      @if (form.controls['nombre'].errors['required']) {
+        <div class="invalid-feedback d-block">Campo Requerido</div>
+      }
+      @if (form.controls['nombre'].errors['maxlength']) {
+        <div class="invalid-feedback d-block">Cantidad máxima de 100 caracteres</div>
+      }
+      @if (form.controls['nombre'].errors['minlength']) {
+        <div class="invalid-feedback d-block">Cantidad mínima de 3 caracteres</div>
+      }
+    }
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <input id="email" type="email" formControlName="email" />
+    @if (form.controls['email'].errors && form.controls['email'].touched) {
+      @if (form.controls['email'].errors['required']) {
+        <div class="invalid-feedback d-block">Campo Requerido</div>
+      }
+      @if (form.controls['email'].errors['maxlength']) {
+        <div class="invalid-feedback d-block">Cantidad máxima de 150 caracteres</div>
+      }
+      @if (form.controls['email'].errors['email']) {
+        <div class="invalid-feedback d-block">Formato incorrecto</div>
+      }
+    }
+  </div>
+
+  <div class="form-group">
+    <label for="telefono">Teléfono:</label>
+    <input id="telefono" type="text" formControlName="telefono" />
+    @if (form.controls['telefono'].errors && form.controls['telefono'].touched) {
+      @if (form.controls['telefono'].errors['required']) {
+        <div class="invalid-feedback d-block">Campo Requerido</div>
+      }
+      @if (form.controls['telefono'].errors['maxlength']) {
+        <div class="invalid-feedback d-block">Cantidad máxima de 50 caracteres</div>
+      }
+      @if (form.controls['telefono'].errors['minlength']) {
+        <div class="invalid-feedback d-block">Cantidad mínima de 6 caracteres</div>
+      }
+      @if (form.controls['telefono'].errors['pattern']) {
+        <div class="invalid-feedback d-block">Formato incorrecto</div>
+      }
+    }
+  </div>
+
+  <div class="form-group">
+    <label for="descripcion">Descripción:</label>
+    <textarea id="descripcion" formControlName="descripcion" rows="3"></textarea>
+    @if (form.controls['descripcion'].errors && form.controls['descripcion'].touched) {
+      @if (form.controls['descripcion'].errors['maxlength']) {
+        <div class="invalid-feedback d-block">Cantidad máxima de 500 caracteres</div>
+      }
+    }
+  </div>
+
+  <fieldset formGroupName="direccion" class="form-group">
+    <legend>Dirección</legend>
+
+
+    <div class="form-group">
+      <label for="provincia">Provincia:</label>
+      <select id="provincia"
+              class="form-control"
+              formControlName="provincia"
+              (change)="onProvinciaSeleccionada($event)">
+        @for (provincia of listaProvincia; track provincia.id) {
+          <option [value]="provincia.id">{{ provincia.nombre }}</option>
+        }
+      </select>
+      @if (form.get('direccion.provincia')?.errors && form.get('direccion.provincia')?.touched) {
+        <div class="invalid-feedback d-block">Campo Requerido</div>
+      }
+    </div>
+
+
+    <div class="form-group">
+      <label for="localidad">Localidad:</label>
+      <select id="localidad"
+              formControlName="localidad"
+              [disabled]="!listaLocalidad.length"
+              class="form-control">
+        @for (loc of listaLocalidad; track loc.id) {
+          <option [value]="loc.nombre">{{ loc.nombre }}</option>
+        }
+      </select>
+
+      @if (form.get('direccion.localidad')?.touched && form.get('direccion.localidad')?.invalid) {
+        @if (form.get('direccion.localidad')?.errors?.['required']) {
+          <div class="invalid-feedback d-block">Campo Requerido</div>
+        }
+        @if (form.get('direccion.localidad')?.errors?.['maxlength']) {
+          <div class="invalid-feedback d-block">Cantidad máxima de 100 caracteres</div>
+        }
+      }
+    </div>
+    <div class="form-group">
+      <label for="calle">Calle:</label>
+      <input id="calle" type="text" formControlName="calle" />
+      @if (form.get('direccion.calle')?.errors && form.get('direccion.calle')?.touched) {
+        @if (form.get('direccion.calle')?.errors?.['required']) {
+          <div class="invalid-feedback d-block">Campo Requerido</div>
+        }
+        @if (form.get('direccion.calle')?.errors?.['maxlength']) {
+          <div class="invalid-feedback d-block">Cantidad máxima de 100 caracteres</div>
+        }
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="numero">Número:</label>
+      <input id="numero" type="text" formControlName="numero" />
+      @if (form.get('direccion.numero')?.errors && form.get('direccion.numero')?.touched) {
+        @if (form.get('direccion.numero')?.errors?.['pattern']) {
+          <div class="invalid-feedback d-block">Formato incorrecto</div>
+        }
+        @if (form.get('direccion.numero')?.errors?.['min']) {
+          <div class="invalid-feedback d-block">Debe ser mayor a 0</div>
+        }
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="piso">Piso:</label>
+      <input id="piso" type="text" formControlName="piso" />
+      @if (form.get('direccion.piso')?.errors && form.get('direccion.piso')?.touched) {
+        @if (form.get('direccion.piso')?.errors?.['maxlength']) {
+          <div class="invalid-feedback d-block">Cantidad máxima de 10 caracteres</div>
+        }
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="depto">Depto:</label>
+      <input id="depto" type="text" formControlName="depto" />
+      @if (form.get('direccion.depto')?.errors && form.get('direccion.depto')?.touched) {
+        @if (form.get('direccion.depto')?.errors?.['maxlength']) {
+          <div class="invalid-feedback d-block">Cantidad máxima de 10 caracteres</div>
+        }
+      }
+    </div>
+  </fieldset>
+
+  <!-- LOGO -->
+  <div class="form-group full-width">
+    <label for="logo">Logo:</label>
+    <input type="file" id="logo" accept="image/*" (change)="onFileSelected($event)" />
+    @if (subiendoLogo) {
+      <div class="alert alert-info">Subiendo logo...</div>
+    }
+    @if (previewUrl) {
+      <img [src]="previewUrl" alt="Preview logo" style="max-width: 200px; margin-top: 10px;" />
+    }
+  </div>
+
+</form>
+@if(mensajeError){
+  <div class="mensaje-error">
+    {{mensajeError}}
+  </div>
+}
+@if(mensajeExito){
+  <div class="mensaje-flotante">
+    {{ mensajeExito }}
+  </div>
+}
+
+@if(!modoEdicion){
+  <div class="acciones-botones">
+  @if(enviando){
+
+    <button class="btn btn-primary btn-lg" disabled>Enviando...</button>
+
+  }@else{
+    <button type="button" (click)="enviar()" [disabled]="form.invalid || !selectedFile">
+      Siguiente
+    </button>
+
+  }
+  </div>
+}
+@if(modoEdicion){
+  <div class="acciones-botones">
+    @if(editando){
+      <button class="btn btn-primary btn-lg" disabled>Editando...</button>
+    }@else{
+      <button type="button" (click)="abrirConfirmacion()" [disabled]="form.invalid ||(!selectedFile && !logoSeleccionado) ">
+        Editar Óptica
+      </button>
+    }
+    <button type="button"
+            (click)="actualizarPlan()"
+            [disabled]="!tieneSuscripcion">
+      Actualizar Plan
+    </button>
+  </div>
+}
+
+@if (mostrarConfirmacion) {
+  <div class="modal-backdrop">
+    <app-confirmar-password
+      (onConfirm)="confirmarAccion()"
+      (onCancel)="cancelarConfirmacion()"
+    ></app-confirmar-password>
+  </div>
+}
+

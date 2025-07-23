@@ -2,7 +2,11 @@ package com.nicoGuti.optica.controlador;
 
 import com.nicoGuti.optica.util.ApiResponse;
 import com.nicoGuti.optica.util.ReplicateService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +19,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -28,6 +33,7 @@ public class ArchivoController {
 
     @Autowired
     private ReplicateService replicateService;
+    private final Path uploadPath = Paths.get("uploads");
 
     @PostMapping("/upload-imagen")
     public ResponseEntity<?> uploadImagen(
@@ -69,23 +75,6 @@ public class ArchivoController {
         }
     }
 
-    @DeleteMapping("/delete-imagen")
-    public ResponseEntity<?> eliminarImagen(@RequestParam("path") String pathRelativo) {
-        try {
-            Path pathAbsoluto = Paths.get("").toAbsolutePath().resolve(pathRelativo.substring(1)); // Quita la primera barra
-            if (!pathAbsoluto.toFile().getCanonicalPath().startsWith(new File("uploads").getCanonicalPath())) {
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ApiResponse(false,"No autorizado"));
-            }
-
-
-
-            Files.deleteIfExists(pathAbsoluto);
-            return ResponseEntity.ok(new ApiResponse(true,"Imagen eliminada con exito"));
-        } catch (IOException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ApiResponse(false,"Error al eliminar la imagen"));
-        }
-    }
 
 
 
@@ -110,4 +99,35 @@ public class ArchivoController {
         }
     }
 
+    @GetMapping("/**")
+    public ResponseEntity<?> verArchivo(HttpServletRequest request) {
+        try {
+            // Obtener ruta relativa completa después de "/api/archivos"
+            String uri = request.getRequestURI();
+            String rutaRelativa = uri.substring("/api/archivos/".length()); // e.g. "uploads/loquesea.png"
+
+            Path root = Paths.get("uploads").toAbsolutePath().normalize();
+            Path archivo = root.resolve(rutaRelativa).normalize();
+            Resource recurso = new UrlResource(archivo.toUri());
+
+            if (!recurso.exists() || !recurso.isReadable()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(new ApiResponse(false, "El archivo no existe o no es legible"));
+            }
+
+            String contentType = Files.probeContentType(archivo);
+            if (contentType == null) {
+                contentType = "application/octet-stream";
+            }
+
+            return ResponseEntity.ok()
+                    .contentType(MediaType.parseMediaType(contentType))
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + recurso.getFilename() + "\"")
+                    .body(recurso);
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponse(false, "Error interno al leer la imagen"));
+        }
+    }
 }

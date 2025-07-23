@@ -1,0 +1,131 @@
+
+.contacto-hero {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+  url('/assets/img/imagen-portada-contacto.png') center/cover no-repeat;
+  padding: 100px 60px;
+  background-size: 100% 100%;
+  color: #fff;
+
+}
+.contacto-contenedor {
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.contacto-texto {
+  flex: 1;
+  min-width: 280px;
+}
+
+.titulo-contacto {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+.contacto-parrafo {
+  font-size: 1.5rem;
+  margin-bottom: 60px;
+  color: #ddd;
+}
+
+.contacto-form {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 450px;
+
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 12px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  height: auto;
+
+}
+
+.contacto-form input,
+.contacto-form textarea,
+.contacto-form select {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+.contacto-form button {
+  padding: 10px 16px;
+  font-size: 1rem;
+  background: linear-gradient(135deg, #0066ff, #004ccc);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 102, 255, 0.25);
+  transition: all 0.3s ease;
+}
+
+.contacto-form button:hover {
+  background: linear-gradient(135deg, #0052cc, #0033aa);
+  box-shadow: 0 8px 20px rgba(0, 80, 200, 0.4);
+  transform: translateY(-2px);
+}
+
+.contacto-form button:active {
+  transform: translateY(1px);
+  box-shadow: 0 4px 12px rgba(0, 70, 180, 0.4);
+}
+
+.contacto-section {
+  padding: 80px 20px 40px;
+  color: white;
+}
+
+
+
+.contacto-section {
+  background-color: #000;
+  padding-bottom: 40px;
+  margin: 0;
+}
+
+.contacto-form select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: white url("data:image/svg+xml;utf8,<svg fill='gray' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>") no-repeat right 12px center;
+  background-size: 16px 16px;
+  padding-right: 40px; /* espacio para el ícono */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #333;
+}
+
+.contacto-form .alert {
+  color: red;
+  background-color: transparent;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+  margin-top: 0px;
+  margin-left: 0px;
+  font-weight: 500;
+
+}
+
+

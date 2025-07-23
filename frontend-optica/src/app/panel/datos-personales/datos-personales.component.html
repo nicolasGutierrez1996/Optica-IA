@@ -1,0 +1,121 @@
+
+@if (mensaje){
+  <div class="mensaje-flotante">
+    {{mensaje}}
+  </div>
+}
+
+<div class="perfil-container position-relative">
+
+  <button type="button"
+          class="btn-close cerrar-btn"
+          aria-label="Cerrar"
+          (click)="irAinicio()"></button>
+
+  <div class="header-editar d-flex justify-content-between align-items-start">
+    <h2 class="titulo-perfil">
+      <i class="fas fa-user-edit"></i> Perfil
+    </h2>
+
+    <label class="toggle-editar">
+      <input type="checkbox" [checked]="modoEdicion" (change)="onToggleEdicion($event)" />
+      Editar
+    </label>
+  </div>
+
+  <form [formGroup]="formPerfil" class="form-perfil" (ngSubmit)="guardarCambios()">
+    <div class="form-group">
+      <label for="nombre">Nombre</label>
+      <input id="nombre" type="text" formControlName="nombre" [disabled]="!modoEdicion" />
+      @if (formPerfil.controls['nombre'].errors && formPerfil.controls['nombre'].touched) {
+        @if (formPerfil.controls['nombre'].errors['required']){
+          <div class="invalid-feedback d-block">Campo Requerido</div>
+        }
+        @if (formPerfil.controls['nombre'].errors['minlength']){
+          <div class="invalid-feedback d-block">Cantidad mínima de 2 caracteres</div>
+        }
+        @if(formPerfil.controls['nombre'].errors['maxlength']){
+          <div class="invalid-feedback d-block">Cantidad máxima de 100 caracteres</div>
+        }
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="apellido">Apellido</label>
+      <input id="apellido" type="text" formControlName="apellido" [disabled]="!modoEdicion" />
+      @if (formPerfil.controls['apellido'].errors && formPerfil.controls['apellido'].touched) {
+        @if (formPerfil.controls['apellido'].errors['required']){
+          <div class="invalid-feedback d-block">Campo Requerido</div>
+        }
+        @if (formPerfil.controls['apellido'].errors['minlength']){
+          <div class="invalid-feedback d-block">Cantidad mínima de 2 caracteres</div>
+        }
+        @if(formPerfil.controls['apellido'].errors['maxlength']){
+          <div class="invalid-feedback d-block">Cantidad máxima de 100 caracteres</div>
+        }
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="dni">DNI</label>
+      <input id="dni" type="text" formControlName="dni" [disabled]="!modoEdicion" />
+      @if (formPerfil.controls['dni'].errors && formPerfil.controls['dni'].touched) {
+        @if (formPerfil.controls['dni'].errors['required']) {
+          <div class="invalid-feedback d-block">Campo Requerido</div>
+        }
+        @if (formPerfil.controls['dni'].errors?.['dniInvalido']) {
+          <div class="invalid-feedback d-block">Formato incorrecto</div>
+        }
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input id="email" type="email" formControlName="email" [disabled]="!modoEdicion" />
+      @if (formPerfil.controls['email'].errors && formPerfil.controls['email'].touched) {
+        @if (formPerfil.controls['email'].errors['required']){
+          <div class="invalid-feedback d-block">Campo Requerido</div>
+        }
+        @if (formPerfil.controls['email'].errors['maxlength']){
+          <div class="invalid-feedback d-block">Cantidad máxima de 100 caracteres</div>
+        }
+        @if(formPerfil.controls['email'].errors['email']){
+          <div class="invalid-feedback d-block">Formato incorrecto</div>
+        }
+      }
+    </div>
+
+    @if(mensajeError){
+      <div class="mensaje-error">
+        {{mensajeError}}
+      </div>
+    }
+
+    @if(modoEdicion){
+      @if(!actualizando){
+        <button type="button"
+                class="btn-guardar"
+                (click)="abrirConfirmacion()"
+                [disabled]="formPerfil.invalid || formPerfil.pending || !modoEdicion">
+          💾 Guardar cambios
+        </button>
+
+
+      }@else{
+        <button type="button" class="btn-guardar" [disabled]="actualizando">
+          Actualizando...
+        </button>
+      }
+    }
+  </form>
+  @if (mostrarConfirmacion) {
+    <div class="modal-backdrop">
+      <app-confirmar-password
+        (onConfirm)="confirmarAccion()"
+        (onCancel)="cancelarConfirmacion()"
+      ></app-confirmar-password>
+    </div>
+  }
+
+</div>
+

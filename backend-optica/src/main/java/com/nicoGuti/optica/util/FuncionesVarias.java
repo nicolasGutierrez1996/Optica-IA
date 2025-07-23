@@ -1,8 +1,12 @@
 package com.nicoGuti.optica.util;
 
+import com.nicoGuti.optica.modelo.TokenVerificacion;
+import com.nicoGuti.optica.modelo.UsuarioAdministrador;
 import org.springframework.stereotype.Component;
 
 import java.security.SecureRandom;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Component
 public class FuncionesVarias  {
@@ -29,5 +33,7 @@ public class FuncionesVarias  {
         return sb.toString();
 
     }
+
+
 
 }

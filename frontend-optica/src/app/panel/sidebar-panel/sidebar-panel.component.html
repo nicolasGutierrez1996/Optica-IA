@@ -1,0 +1,54 @@
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <img src="assets/img/imagen-icono-sidebar.png" alt="Óptica IA" />
+  </div>
+
+  <div class="sidebar-scroll">
+    <ul class="sidebar-menu">
+      <li [class.active]="seccionActiva === 'inicio'"  (click)="emitirSeccion('inicio')">
+        <i class="fas fa-home"></i> Inicio
+      </li>
+
+      <li (click)="mostrarSubmenu.optica = !mostrarSubmenu.optica">
+        <i class="fas fa-store"></i> Óptica
+      </li>
+      @if(mostrarSubmenu.optica){
+        <ul class="submenu">
+          <li [class.active]="seccionActiva === 'registrar-optica'" (click)="emitirSeccion('registrar-optica')">Registrar óptica</li>
+          <li [class.active]="seccionActiva === 'editar-optica'" (click)="emitirSeccion('editar-optica')">Editar óptica</li>
+          <li [class.active]="seccionActiva === 'eliminar-optica'" (click)="emitirSeccion('eliminar-optica')">Eliminar óptica</li>
+        </ul>
+      }
+
+      <li (click)="mostrarSubmenu.anteojo= !mostrarSubmenu.anteojo">
+        <i class="fas fa-glasses"></i> Anteojos
+      </li>
+      @if(mostrarSubmenu.anteojo){
+        <ul class="submenu">
+          <li [class.active]="seccionActiva === 'crear-anteojo'" (click)="emitirSeccion('crear-anteojo')">Crear Anteojo</li>
+          <li [class.active]="seccionActiva === 'editar-anteojo'" (click)="emitirSeccion('editar-anteojo')">Editar Anteojo</li>
+          <li [class.active]="seccionActiva === 'eliminar-anteojo'" (click)="emitirSeccion('eliminar-anteojo')">Eliminar Anteojo</li>
+        </ul>
+      }
+
+      <li (click)="mostrarSubmenu.lente=!mostrarSubmenu.lente">
+        <i class="fas fa-eye-dropper"></i> Lentes de contacto
+      </li>
+      @if(mostrarSubmenu.lente){
+        <ul class="submenu">
+          <li [class.active]="seccionActiva === 'crear-lente'" (click)="emitirSeccion('crear-lente')">Registrar Lente</li>
+          <li [class.active]="seccionActiva === 'editar-lente'" (click)="emitirSeccion('editar-lente')">Editar Lente</li>
+          <li [class.active]="seccionActiva === 'eliminar-lente'" (click)="emitirSeccion('eliminar-lente')">Eliminar Lente</li>
+        </ul>
+      }
+
+      <li [class.active]="seccionActiva === 'metricas'"  (click)="emitirSeccion('metricas')">
+        <i class="fas fa-chart-bar"></i> Métricas
+      </li>
+    </ul>
+  </div>
+
+  <div class="sidebar-footer">
+    <button (click)="logout()"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</button>
+  </div>
+</nav>

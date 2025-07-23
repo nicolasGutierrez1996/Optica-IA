@@ -1,0 +1,71 @@
+<div class="inicio-container">
+  <!-- Encabezado -->
+  <div class="header">
+    <h1 class="titulo-optica">{{ nombreOptica }}</h1>
+    <div class="usuario-info">
+      <button class="btn-ver-datos" (click)="verMisDatos()">
+        <i class="fas fa-user"></i> Ver mis datos
+      </button>
+    </div>
+  </div>
+
+  <!-- Plan -->
+  <div class="plan-info">
+    <div class="card">
+      <h2 class="titulo-seccion">Plan actual</h2>
+      <p>
+        <strong class="valor-destacado" [ngClass]="{
+          'plan-premium': nombrePlan === 'PREMIUM',
+          'plan-basico': nombrePlan === 'Básico'
+        }">{{ nombrePlan }}</strong>
+      </p>
+      <p>Días restantes: <strong>{{ diasRestantes }}</strong></p>
+    </div>
+  </div>
+
+  <!-- Cupón -->
+  <div class="card tarjeta-cupon position-relative">
+    <!-- Botones flotantes arriba a la derecha -->
+    <div class="botones-flotantes">
+      <button class="btn-icono" (click)="copiarCupon()" title="Copiar cupón">
+        <i class="fas fa-copy"></i>
+      </button>
+      <button class="btn-icono" (click)="compartirCuponPorWhatsapp()" title="Compartir por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+      </button>
+    </div>
+
+    <h2 class="titulo-seccion">Tu cupón</h2>
+
+    @if(codigoCupon){
+      <p><strong class="codigo-cupon">{{codigoCupon}}</strong></p>
+    }@else{
+      <p><strong class="codigo-cupon">No tienes cupón</strong></p>
+    }
+
+    <p>Usado: <strong>{{cuponesUsados}}</strong>/3 veces</p>
+
+    @if(cuponesUsados==3){
+      <i class="fas fa-gift icono-beneficio"></i> <span class="beneficio-texto">¡Beneficio otorgado!</span>
+    }
+
+    @if(generandoCupon){
+      <button class="btn-generar" [disabled]="generandoCupon">Generando...</button>
+    } @else {
+      <button class="btn-generar" (click)="generarCupon()" [disabled]="codigoCupon && cuponesUsados<3">
+        🔄 Generar nuevo
+      </button>
+    }
+  </div>
+  @if (mensaje){
+    <div class="mensaje-flotante">
+      {{ mensaje }}
+    </div>
+  }
+
+  @if (mensajeError){
+    <div class="mensaje-error">
+      {{ mensajeError }}
+    </div>
+  }
+</div>

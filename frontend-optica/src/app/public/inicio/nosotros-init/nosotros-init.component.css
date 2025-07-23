@@ -1,0 +1,66 @@
+
+.nosotros-hero {
+  background-image: url('/assets/img/imagen-portada-nosotros-init.png');
+  background-size: cover;
+  background-position: center;
+  padding: 60px;
+  color: #1a1a1a;
+  position: relative;
+  text-align: left;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.texto-nosotros {
+  background-color: rgba(255, 255, 255, 0.50); /* fondo translúcido */
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  max-width: 1000px;
+  animation: fadeInUp 1s ease-out forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.titulo-nosotros {
+  font-size: 3.2rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #111;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.6);
+}
+
+.nosotros-parrafo {
+  max-width: 900px;
+  margin: 0 auto 20px auto;
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.8;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.4);
+  color: #111;
+}
+
+.destacado {
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: #0056cc;
+}
+
+.creditos {
+  font-style: italic;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 40px;
+  color: #0056cc;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.6);
+}

@@ -1,5 +1,6 @@
 package com.nicoGuti.optica.modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -19,12 +20,13 @@ import java.time.LocalDateTime;
 @Builder
 public class Optica {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank
-    @Size(max = 100)
+    @Size(min = 3, max = 100)
     @Column(nullable = false, unique = true)
     private String nombre;
 
@@ -37,17 +39,17 @@ public class Optica {
     private Direccion direccion;
 
     @NotBlank
-    @Size(max = 50)
-    @Column(nullable = true)
+    @Size(min = 6, max = 50)
+    @Column(nullable = false)
     private String telefono;
 
     @NotBlank
     @Email
-    @Size(max = 150)
+    @Size(min = 5, max = 150)
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Size(max = 500)
+    @Size( max = 500)
     private String descripcion;
 
     @Column(nullable = false)
@@ -59,12 +61,18 @@ public class Optica {
     @Column(name = "fecha_ultima_actualizacion")
     private LocalDateTime fecha_ultima_actualizacion;
 
+    @ManyToOne
+    @JoinColumn(name = "cupon_usado_id")
+    @JsonIgnore
+    private CuponDescuento cuponUtilizado;
+
     @PrePersist
     private void antesDePersistir(){
-        this.fecha_creacion=LocalDateTime.now();
+        this.fecha_creacion = LocalDateTime.now();
     }
+
     @PreUpdate
     private void antesDeModificar(){
-        this.fecha_ultima_actualizacion=LocalDateTime.now();
+        this.fecha_ultima_actualizacion = LocalDateTime.now();
     }
 }

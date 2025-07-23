@@ -27,6 +27,19 @@ public class UsuarioAdministrador {
     private String username;
 
     @NotBlank
+    @Size(min = 2, max = 100)
+    @Column(nullable = false)
+    private String nombre;
+
+    @NotBlank
+    @Size(min = 2, max = 100)
+    @Column(nullable = false)
+    private String apellido;
+
+    @Column(length = 20, unique = true)
+    private String dni;
+
+    @NotBlank
     @Size(min = 6, max = 100)
     @Column(nullable = false)
     private String password;
@@ -37,9 +50,8 @@ public class UsuarioAdministrador {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "optica_id", nullable = false)
-    @NotNull
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "optica_id", nullable = true)
     private Optica optica;
 
     @Column(name = "fecha_creacion")
@@ -49,11 +61,13 @@ public class UsuarioAdministrador {
     private LocalDateTime fecha_ultima_actualizacion;
 
     @Column(name = "token")
-    @Null
     private String token;
+
     @Column(name = "tokenExpiracion")
-    @Null
     private LocalDateTime tokenExpiracion;
+
+    @Column(nullable = false)
+    private boolean verificado = false;
 
     @PrePersist
     private void antesDePersistir(){

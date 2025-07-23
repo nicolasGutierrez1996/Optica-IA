@@ -1,0 +1,282 @@
+.form-suscripcion {
+  max-width: 800px;
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(6px);
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  margin: -15px auto 32px auto;
+  padding: 15px;
+}
+
+.titulo-suscripcion {
+  font-size: 32px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 32px;
+  color: #1f2937;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.contenedor-tarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+@media (min-width: 768px) {
+  .contenedor-tarjetas {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.tarjeta-plan {
+  border-radius: 20px;
+  overflow: hidden;
+  border: 3px solid transparent;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  position: relative;
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.tarjeta-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 12px 16px;
+  color: white;
+}
+
+.tarjeta-cuerpo {
+  background-color: white;
+  padding: 16px;
+  color: #1f2937;
+  flex-grow: 1;
+  transition: transform 0.2s ease-in-out;
+}
+
+.precio {
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 12px;
+  color: #111827;
+}
+
+.beneficios {
+  list-style: none;
+  padding: 0;
+  font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.beneficios li {
+  padding-left: 8px;
+  color: #1f2937;
+}
+
+.beneficios li::before {
+  content: "✓";
+  color: #22c55e;
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.basico-header {
+  background-color: #2563eb;
+}
+
+.premium-header {
+  background-color: #ca8a04;
+}
+
+.tarjeta-plan.basico {
+  border-color: #2563eb;
+}
+
+.tarjeta-plan.premium {
+  border-color: #ca8a04;
+}
+
+.tarjeta-plan input[type="radio"] {
+  accent-color: blue;
+  transform: scale(1.2);
+  position: absolute;
+  top: 12px;
+  left: 16px;
+}
+
+.tarjeta-plan:hover .tarjeta-cuerpo {
+  transform: scale(1.02);
+  transition: transform 0.2s ease-in-out;
+}
+
+.tarjeta-plan:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.tarjeta-plan.seleccionado {
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.3);
+}
+
+.tarjeta-plan ul li {
+  font-weight: 600;
+  font-size: 15px;
+  color: #1f2937;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.campos-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+/* INPUTS alineados */
+.grupo-inputs {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.grupo-inputs > div {
+  flex: 1;
+  min-width: 220px;
+}
+
+/* INPUTS */
+.form-suscripcion input[type="text"] {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  background-color: #ffffff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  font-size: 16px;
+  color: #111827;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-suscripcion input[type="text"]::placeholder {
+  color: #9ca3af;
+}
+
+.form-suscripcion input[type="text"]:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+/* BOTÓN CENTRADO */
+.boton-container {
+  display: flex;
+  justify-content: center;
+}
+
+.boton-pagar {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.boton-pagar:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.btn-premium {
+  background-color: #ca8a04;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(202, 138, 4, 0.3);
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-premium:hover {
+  background-color: #a77203;
+  transform: translateY(-2px);
+}
+
+.boton-pagar:disabled,
+.btn-premium:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.tarjeta-confirmacion {
+  max-width: 800px;
+  margin: 100px auto 40px auto; /* <-- este valor subió de 40px a 100px */
+  background-color: #e6f9ec;
+  border: 2px solid #a5e2be;
+  border-radius: 16px;
+  padding: 40px 30px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  font-family: "Segoe UI", sans-serif;
+}
+
+.tarjeta-confirmacion .titulo {
+  font-size: 32px;
+  font-weight: bold;
+  color: #2e7d32;
+  margin-bottom: 12px;
+}
+
+.tarjeta-confirmacion .subtitulo {
+  font-size: 20px;
+  color: #3b573b;
+}
+
+.centrado {
+  justify-content: center;
+}
+.contenedor-tarjetas.centrado {
+  grid-template-columns: 1fr;
+  place-items: center;
+}
+.modal-backdrop {
+  position: absolute; /* CAMBIADO */
+  inset: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+

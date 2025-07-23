@@ -1,5 +1,6 @@
 package com.nicoGuti.optica.servicio;
 
+import com.nicoGuti.optica.modelo.Optica;
 import com.nicoGuti.optica.modelo.UsuarioAdministrador;
 import com.nicoGuti.optica.repositorio.UsuarioAdministradorRepositorio;
 import org.springframework.stereotype.Service;
@@ -60,4 +61,30 @@ public class UsuarioAdministradorServicio {
         return usuarioRepo.findByEmail(email);
 
     }
+
+    public boolean existeUserName(String userName){
+        return usuarioRepo.existsByUsername(userName);
+    }
+
+    public boolean existeEmail(String email){
+        return usuarioRepo.existsByEmail(email);
+    }
+
+    public Optional<Boolean> esUsuarioVerificado(String username){
+        return usuarioRepo.esUsuarioVerificado(username);
+    }
+
+    public Optional<UsuarioAdministrador> buscarUserPorOptica(Optica optica){
+        return usuarioRepo.findByOptica(optica);
+    }
+    public Optional<UsuarioAdministrador> buscarPorDni(String dni){
+        return usuarioRepo.findByDni(dni);
+    }
+
+    public Optional<String> buscarContraseniaPorId(Long id){
+        return usuarioRepo.findPasswordById(id);
+    }
+
+
+
 }

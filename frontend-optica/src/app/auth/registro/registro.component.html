@@ -1,1 +1,194 @@
-<p>registro works!</p>
+<div class="fondo-registro">
+  <div class="registro-container">
+    <h2>Crear una cuenta</h2>
+
+    <form class="registro-form" [formGroup]="formGroup">
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" placeholder="Ej: Jesus Rodrigo"
+                 formControlName="nombre" />
+          @if (formGroup.controls['nombre'].errors && formGroup.controls['nombre'].touched) {
+            @if (formGroup.controls['nombre'].errors['required']){
+              <div class="invalid-feedback d-block">Campo Requerido</div>
+            }
+            @if (formGroup.controls['nombre'].errors['minlength']){
+              <div class="invalid-feedback d-block">Cantidad minima de 2 caracteres</div>
+            }
+            @if(formGroup.controls['nombre'].errors['maxlength']){
+              <div class="invalid-feedback d-block">Cantidad maxima de 100 caracteres</div>
+            }
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="apellido">Apellido</label>
+          <input type="text" id="apellido" placeholder="Ej: Gutiérrez" formControlName="apellido" />
+          @if (formGroup.controls['apellido'].errors && formGroup.controls['apellido'].touched) {
+            @if (formGroup.controls['apellido'].errors['required']){
+              <div class="invalid-feedback d-block">Campo Requerido</div>
+            }
+            @if (formGroup.controls['apellido'].errors['minlength']){
+              <div class="invalid-feedback d-block">Cantidad minima de 2 caracteres</div>
+            }
+            @if(formGroup.controls['apellido'].errors['maxlength']){
+              <div class="invalid-feedback d-block">Cantidad maxima de 100 caracteres</div>
+            }
+          }
+        </div>
+      </div>
+
+      <div class="form-group horizontal">
+        <div class="input-wrapper">
+          <label for="username">Nombre de Usuario</label>
+          <input type="text" id="username" formControlName="username" placeholder="Ej: ngutierrez" />
+          @if (formGroup.controls['username'].errors && formGroup.controls['username'].touched) {
+            @if (formGroup.controls['username'].errors['required']){
+              <div class="invalid-feedback d-block">Campo Requerido</div>
+            }
+            @if (formGroup.controls['username'].errors['minlength']){
+              <div class="invalid-feedback d-block">Cantidad minima de 6 caracteres</div>
+            }
+            @if(formGroup.controls['username'].errors['maxlength']){
+              <div class="invalid-feedback d-block">Cantidad maxima de 100 caracteres</div>
+            }
+            @if(formGroup.controls['username'].errors?.['usernameExistente']){
+              <div class="invalid-feedback d-block">
+                El username ingresado ya existe
+              </div>
+            }
+
+
+
+          }
+
+        </div>
+
+        <button type="button"
+                class="btn-autogenerar"
+                (click)="generarUsername()"
+                [disabled]="!formGroup.controls['nombre'].valid || !formGroup.controls['apellido'].valid">
+          <i class="fas fa-magic"></i> Autogenerar
+        </button>
+
+      </div>
+
+      <div class="form-group">
+        <label for="email">Correo electrónico</label>
+        <input type="email" id="email" placeholder="Ej: tu@email.com" formControlName="email" />
+        @if (formGroup.controls['email'].errors && formGroup.controls['email'].touched) {
+          @if (formGroup.controls['email'].errors['required']){
+            <div class="invalid-feedback d-block">Campo Requerido</div>
+          }
+          @if (formGroup.controls['email'].errors['maxlength']){
+            <div class="invalid-feedback d-block">Cantidad maxima de 100 caracteres</div>
+          }
+          @if(formGroup.controls['email'].errors['email']){
+            <div class="invalid-feedback d-block">Formato incorrecto</div>
+          }
+          @if(formGroup.controls['email'].errors?.['emailExistente']){
+            <div class="invalid-feedback d-block">
+              El email ingresado ya existe
+            </div>
+          }
+          @if(formGroup.controls['email'].errors?.['emailInvalido']){
+            <div class="invalid-feedback d-block">
+              El email ingresado tiene un formato incorrecto
+            </div>
+          }
+        }
+
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="password">Contraseña</label>
+          <div class="input-password">
+            <input [type]="verPassword ? 'text' : 'password'" id="password"
+                   placeholder="Mínimo 6 caracteres" formControlName="password" />
+            <button type="button" class="btn-ojito" (click)="verPassword = !verPassword">
+              <i class="fas" [ngClass]="verPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+            </button>
+          </div>
+          @if (formGroup.controls['password'].errors && formGroup.controls['password'].touched) {
+            @if (formGroup.controls['password'].errors['required']){
+              <div class="invalid-feedback d-block">Campo Requerido</div>
+            }
+            @if (formGroup.controls['password'].errors['minlength']){
+              <div class="invalid-feedback d-block">Cantidad minima de 6 caracteres</div>
+            }
+            @if(formGroup.controls['password'].errors['maxlength']){
+              <div class="invalid-feedback d-block">Cantidad maxima de 100 caracteres</div>
+            }
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="confirmar">Confirmar contraseña</label>
+          <div class="input-password">
+            <input [type]="verConfirmar ? 'text' : 'password'" id="confirmar"
+                   placeholder="Repita su contraseña" formControlName="confirmar" />
+            <button type="button" class="btn-ojito" (click)="verConfirmar = !verConfirmar">
+              <i class="fas" [ngClass]="verConfirmar ? 'fa-eye-slash' : 'fa-eye'"></i>
+            </button>
+          </div>
+          @if (formGroup.controls['confirmar'].errors && formGroup.controls['confirmar'].touched) {
+            @if (formGroup.controls['confirmar'].errors['required']){
+              <div class="invalid-feedback d-block">Campo Requerido</div>
+            }
+            @if (formGroup.controls['confirmar'].errors['minlength']){
+              <div class="invalid-feedback d-block">Cantidad minima de 6 caracteres</div>
+            }
+            @if(formGroup.controls['confirmar'].errors['maxlength']){
+              <div class="invalid-feedback d-block">Cantidad maxima de 100 caracteres</div>
+            }
+
+          }
+          @if (formGroup.errors?.['contrasenasDistintas'] && formGroup.get('confirmar')?.touched) {
+            <div class="invalid-feedback d-block">
+              Las contraseñas no coinciden
+            </div>
+          }
+        </div>
+      </div>
+      @if (enProceso) {
+        <button class="btn btn-primary btn-lg" disabled>Registrando...</button>
+      } @else {
+        <button type="submit" class="btn btn-primary btn-lg" [disabled]="formGroup.invalid"
+        (click)="registrarUsuario()">Registrarse</button>
+      }
+    </form>
+
+
+    <p class="ya-tienes-cuenta">
+      ¿Ya tienes una cuenta?
+      <a class="iniciar-sesion" (click)="irAlogin()">Iniciar sesión</a>
+    </p>
+    @if(mensajeError){
+      <div class="mensaje-error">
+        {{mensajeError}}
+      </div>
+    } @else if (mensaje){
+      <div class="mensaje-registro-exitoso">
+        {{mensaje}}
+      </div>
+    }
+  </div>
+  @if (mensajeExito==true){
+    <div
+
+      class="toast-exito"
+    >
+      <i class="bi bi-check-circle-fill me-2"></i>
+      ¡Formulario enviado exitosamente!
+    </div>
+  }
+
+  @if (ocurrioError == true) {
+    <div class="toast-error">
+      <i class="bi bi-exclamation-triangle-fill me-2"></i>
+      Ocurrió un error al enviar el formulario.
+    </div>
+  }
+</div>

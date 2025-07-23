@@ -16,7 +16,6 @@ public class ApiResponse {
     private Object data;
     private List<String> errores;
 
-    // Constructores útiles para diferentes casos
 
     public ApiResponse(boolean success, String message, Object data) {
         this.success = success;

@@ -1,0 +1,81 @@
+<section class="contacto-hero">
+  <div class="contacto-contenedor">
+    <div class="contacto-texto">
+      <h2 class="titulo-contacto">Contacto</h2>
+      <p class="contacto-parrafo">¿Querés que tu negocio tenga presencia online profesional? Dejá tu consulta.</p>
+      <p class="contacto-parrafo">Nos especializamos en soluciones web elegantes, rápidas y efectivas.</p>
+      <p class="contacto-parrafo">También podés enviarnos tus quejas o sugerencias para mejorar nuestros servicios. ¡Valoramos tu opinión!</p>
+    </div>
+
+    <form class="contacto-form" [formGroup]="form" (ngSubmit)="enviarFormulario()">
+      <div class="form-group">
+        <input type="text" formControlName="nombre" placeholder="Tu nombre"
+               class="form-control" />
+        @if (form.controls['nombre'].touched && form.controls['nombre'].errors?.['required']) {
+          <div class="invalid-feedback d-block">Campo Requerido</div>
+        }
+      </div>
+      <div class="form-group">
+        <input type="text" formControlName="apellido" placeholder="Tu apellido"
+               class="form-control" />
+        @if (form.controls['apellido'].touched && form.controls['apellido'].errors?.['required']) {
+          <div class="invalid-feedback d-block">Campo Requerido</div>
+        }
+      </div>
+      <div class="form-group">
+        <input type="text" formControlName="email" placeholder="Tu email"
+               class="form-control" />
+        @if (form.controls['email'].touched && form.controls['email'].errors?.['required']) {
+          <div class="invalid-feedback d-block">Campo Requerido</div>
+        } @else if (form.controls['email'].touched && form.controls['email'].errors?.['email']) {
+          <div class="invalid-feedback d-block">Formato incorrecto</div>
+
+        }
+        </div>
+      <div class="form-group">
+        <input type="text" formControlName="telefono" placeholder="Tu teléfono" class="form-control" />
+        @if (form.controls['telefono'].touched && form.controls['telefono'].errors?.['required']) {
+          <div class="invalid-feedback d-block">Campo Requerido</div>
+        }
+      </div>
+      <div class="form-group">
+        <select formControlName="motivo" class="form-control w-100" required>
+          <option value="">Seleccioná el motivo de consulta</option>
+          <option value="queja">Queja</option>
+          <option value="proyecto">Solicitud de proyecto</option>
+        </select>
+        @if (form.controls['motivo'].touched && form.controls['motivo'].errors?.['required']) {
+          <div class="invalid-feedback d-block">Campo Requerido</div>
+        }
+      </div>
+      <div class="form-group">
+        <textarea formControlName="descripcion" class="form-control w-100" rows="4" placeholder="Añade una descripcion"></textarea>
+        @if (form.controls['descripcion'].touched && form.controls['descripcion'].errors?.['required']) {
+          <div class="invalid-feedback d-block">Campo Requerido</div>
+        }
+      </div>
+      @if (enProceso) {
+        <button disabled>Enviando...</button>
+      } @else {
+        <button type="submit" [disabled]="form.invalid">Enviar</button>
+      }
+    </form>
+    @if (mensajeExito==true){
+      <div
+
+        class="toast-exito"
+      >
+        <i class="bi bi-check-circle-fill me-2"></i>
+        ¡Formulario enviado exitosamente!
+      </div>
+    }
+
+    @if (mensajeError == true) {
+      <div class="toast-error">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        Ocurrió un error al enviar el formulario.
+      </div>
+    }
+
+  </div>
+</section>

@@ -1,0 +1,136 @@
+:host {
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.recuperar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 40px 20px;
+  background: linear-gradient(rgba(0, 0, 50, 0.4), rgba(0, 0, 80, 0.6)),
+  url('/assets/img/imagen-fondo-login.png') no-repeat center center;
+}
+.form-group {
+  margin-bottom: 20px;
+}
+.recuperar-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 16px;
+  padding: 25px;
+  max-width: 420px;
+  width: 100%;
+  color: #fff;
+  text-align: center;
+  animation: fadeIn 0.8s ease-out;
+}
+
+.recuperar-card input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  margin-bottom: 0px;
+}
+
+.recuperar-card button:not(.btn-ojito) {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #1d8cf8, #005ce6);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.volver-login {
+  margin-top: 20px;
+}
+
+.volver-login a {
+  color: #a0d4ff;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+.volver-login a:hover {
+  text-decoration: underline;
+  color: #fff;
+}
+
+
+
+
+.invalid-feedback {
+  font-size: 0.85rem;
+  color: #ff5c5c;
+  margin-top: 1px;
+}
+
+input.is-invalid {
+  border: 1px solid #ff5c5c !important;
+  box-shadow: 0 0 6px rgba(255, 92, 92, 0.4);
+}
+
+.boton-instrucciones {
+  width: 100%;
+  padding: 14px 20px;
+  font-size: 1.1rem;
+  background: linear-gradient(135deg, #0066ff, #004ccc);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(0, 102, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.boton-instrucciones:hover {
+  background: linear-gradient(135deg, #0040c1, #002a8c);
+  box-shadow: 0 10px 24px rgba(0, 102, 255, 0.6);
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.boton-instrucciones:disabled {
+  background: #a0b8d6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+
+.input-password {
+  position: relative;
+}
+
+.input-password input {
+  width: 100%;
+  padding: 12px;
+  padding-right: 40px; /* espacio para el ojito */
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  background-color: #3a4b63; /* el fondo que estés usando */
+  color: white;
+}
+
+.btn-ojito {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  padding: 0;
+  line-height: 1;
+  cursor: pointer;
+}

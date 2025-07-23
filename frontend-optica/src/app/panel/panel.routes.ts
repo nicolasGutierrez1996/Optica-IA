@@ -1,14 +1,16 @@
 import { Routes } from '@angular/router';
 import { PanelComponent } from './panel.component';
 
-export const routes: Routes = [
+const routes: Routes = [
   {
     path: '',
     component: PanelComponent,
     children: [
-      // Aquí agregás las subrutas como:
+      // Ejemplos de subrutas internas del panel:
       // { path: 'dashboard', component: DashboardComponent },
       // { path: 'perfil', component: PerfilComponent },
     ]
   }
 ];
+
+export default routes;

@@ -1,0 +1,14 @@
+<div class="verificacion-container">
+  @if(verificando) {
+    <h2>🔄 Verificando...</h2>
+    <p>{{ mensaje }}</p>
+  } @else {
+    <h2 [class.exito]="verificado" [class.error]="!verificado">
+      {{ verificado ? '✅ Verificación exitosa' : '❌ Error al verificar' }}
+    </h2>
+    <p>{{ mensaje }}</p>
+    @if(verificado) {
+      <p class="redireccion">Serás redirigido en unos segundos...</p>
+    }
+  }
+</div>

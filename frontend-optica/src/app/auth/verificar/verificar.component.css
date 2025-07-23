@@ -1,0 +1,39 @@
+:host {
+  display: block;
+  margin-top: 100px;
+}
+
+.verificacion-container {
+  text-align: center;
+  font-family: "Segoe UI", Arial, sans-serif;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 12px;
+  max-width: 520px;
+  margin: 60px auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.verificacion-container h2 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+
+.verificacion-container p {
+  font-size: 1.1rem;
+  color: #444;
+}
+
+h2.exito {
+  color: #28a745;
+}
+
+h2.error {
+  color: #dc3545;
+}
+
+.redireccion {
+  margin-top: 10px;
+  font-style: italic;
+  color: #666;
+}

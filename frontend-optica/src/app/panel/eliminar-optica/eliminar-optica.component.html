@@ -1,0 +1,41 @@
+<div class="modal-confirmacion">
+  <div class="modal-contenido">
+    <div class="icono">⚠️</div>
+    <h3>¿Está seguro que desea eliminar su cuenta de Óptica IA?</h3>
+    <p>Esta operación es irreversible.</p>
+    <p><strong>Se eliminará:</strong></p>
+    <ul class="lista-eliminacion">
+      <li>🧑‍💼 Su usuario</li>
+      <li>🏪 Su óptica</li>
+      <li>📅 Su suscripción</li>
+      <li>👓 Todos sus anteojos cargados</li>
+    </ul>
+    @if(mensajeError){
+      <div class="mensaje-error">
+        {{ mensajeError }}
+      </div>
+    }
+    @if(mensaje){
+      <div class="mensaje-flotante">
+        {{ mensaje }}
+      </div>
+    }
+    <div class="botones">
+      <button class="btn-cancelar" (click)="volverAinicio()">Cancelar</button>
+      @if(eliminando){
+        <button class="btn-eliminar" [disabled]="eliminando">Eliminando</button>
+      }@else{
+        <button class="btn-eliminar" (click)="abrirConfirmacion()">Eliminar</button>
+      }
+    </div>
+  </div>
+  @if (mostrarConfirmacion) {
+    <div class="modal-backdrop">
+      <app-confirmar-password
+        (onConfirm)="confirmarAccion()"
+        (onCancel)="cancelarConfirmacion()"
+      ></app-confirmar-password>
+    </div>
+  }
+
+</div>

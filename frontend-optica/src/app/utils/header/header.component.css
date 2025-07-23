@@ -1,3 +1,13 @@
+:host {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-height);
+  z-index: 1000;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 .header {
   display: flex;
   justify-content: space-between;
@@ -65,5 +75,16 @@
   padding: 0.3rem 0.8rem;
   font-size: 0.9rem;
   border-radius: 5px;
+  cursor: pointer;
+}
+
+.sign-in-button:hover {
+  background-color: #000;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.menu a {
   cursor: pointer;
 }

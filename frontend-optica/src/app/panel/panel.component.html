@@ -1,1 +1,26 @@
-<p>panel works!</p>
+<div class="panel-container">
+  <app-sidebar-panel [seccionActiva]="seccionActiva" (seccionSeleccionada)="cambiarSeccion($event)"></app-sidebar-panel>
+
+  <div class="panel-contenido">
+    @switch (seccionActiva) {
+      @case ('registrar-optica') {
+        <app-datos-optica (registroCompletado)="irASuscripcion($event)" [modoEdicion]="false" (esEdicion)="setEsEdicion($event)"></app-datos-optica>
+      }
+      @case ('suscripcion-optica') {
+        <app-suscripcion-optica (seGeneroLinkPago)="irAinicio()" [vieneDeEdicion]="vieneDeEdicion" [optica]="opticaGuardada!"></app-suscripcion-optica>
+      }
+      @case ('inicio') {
+        <app-inicio-panel (editarDatos)="irAeditarDatos()"></app-inicio-panel>
+      }
+      @case ('editar-optica') {
+        <app-datos-optica (registroCompletado)="irASuscripcion($event)" (esEdicion)="setEsEdicion($event)" [modoEdicion]="true"></app-datos-optica>
+      }
+      @case ('eliminar-optica'){
+        <app-eliminar-optica (irInicio)="irAinicio()" />
+      }
+      @case ('editar-datos'){
+        <app-datos-personales (salir)="irAinicio()"/>
+      }
+    }
+  </div>
+</div>
